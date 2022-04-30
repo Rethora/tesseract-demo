@@ -2,7 +2,13 @@
 
 .App {
   text-align: center;
+  position: relative;
+  padding-bottom: 40px;
+}
+
+.container {
   padding: 70px 0;
+  position: relative;
 }
 
 img {
@@ -21,6 +27,12 @@ p {
   font-size: 20px;
   width: fit-content;
   margin: auto;
+}
+
+a {
+  position: absolute;
+  bottom: 0;
+  right: 0;
 }
 
 @media screen and (max-width: 1200px) {

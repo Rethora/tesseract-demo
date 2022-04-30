@@ -2,6 +2,7 @@ import { createRef, useState } from "react"
 import { Button, Container, Icon, Progress } from "semantic-ui-react"
 import { createWorker } from "tesseract.js"
 import "./App.css"
+
 const App = () => {
   const [ocr, setOcr] = useState("")
   const [imageData, setImageData] = useState(null)
@@ -70,7 +71,7 @@ const App = () => {
           />
           <p style={{ margin: "auto 0" }}>{imageName}</p>
         </div>
-        <div className="display-flex">
+        <div>
           <img src={imageData} alt="" srcSet="" />
           <br />
           {imageData ? (
@@ -99,6 +100,13 @@ const App = () => {
             </>
           ) : null}
         </div>
+        <a
+          rel="noreferrer"
+          target="_blank"
+          href="https://github.com/Rethora/tesseract-demo"
+        >
+          Source Code
+        </a>
       </Container>
     </div>
   )
