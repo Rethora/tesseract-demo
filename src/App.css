@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
 .App {
@@ -9,6 +11,7 @@
 .container {
   padding: 70px 0;
   position: relative;
+  min-height: 90vh;
 }
 
 img {
@@ -16,12 +19,16 @@ img {
   height: 50vh;
 }
 
+h1, h2 {
+  font-family: 'Raleway', sans-serif;
+}
+
 h2 {
   margin: 50px 0 20px 0;
 }
 
 p {
-  font-family: 'Roboto',
+  font-family: 'Roboto Slab',
   sans-serif;
   text-align: justify;
   font-size: 20px;
@@ -33,6 +40,10 @@ a {
   position: absolute;
   bottom: 0;
   right: 0;
+}
+
+.progress {
+  margin: 0!important;
 }
 
 @media screen and (max-width: 1200px) {

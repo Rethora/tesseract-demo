@@ -58,7 +58,7 @@ const App = () => {
         <div style={{ display: "flex", justifyContent: "center" }}>
           <Button
             icon="file"
-            color="instagram"
+            color="linkedin"
             content="Choose File"
             labelPosition="right"
             onClick={() => fileInputRef.current.click()}
@@ -75,19 +75,22 @@ const App = () => {
           <img src={imageData} alt="" srcSet="" />
           <br />
           {imageData ? (
-            <Button
-              icon
-              color="instagram"
-              labelPosition="right"
-              onClick={convertImageToText}
-            >
-              Read Text
-              <Icon name="right arrow" />
-            </Button>
+            <>
+              <h2>Extract Text From Image</h2>
+              <Button
+                icon
+                color="linkedin"
+                labelPosition="right"
+                onClick={convertImageToText}
+              >
+                Start
+                <Icon name="right arrow" />
+              </Button>
+            </>
           ) : null}
           {progress ? (
             <>
-              <p style={{ textAlign: "left", margin: "20px 0 0 0" }}>
+              <p style={{ margin: "40px auto 0 auto" }}>
                 {progress.status[0].toUpperCase() + progress.status.slice(1)}
               </p>
               <Progress percent={progress.progress * 100} indicating />
