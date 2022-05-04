@@ -94,10 +94,10 @@ const App = () => {
           </>
         ) : null}
         <div style={{ padding: "30px 0" }}>
-          <div style={{ display: "flex" }}>
+          <div className="in-out-container">
             <img src={imageData} alt="" srcSet="" />
             {ocr ? (
-              <div style={{ width: "45%" }}>
+              <div className="output-container">
                 <h2>Output</h2>
                 <p>{ocr}</p>
               </div>
