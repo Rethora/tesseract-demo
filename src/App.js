@@ -71,37 +71,39 @@ const App = () => {
           />
           <p style={{ margin: "auto 0" }}>{imageName}</p>
         </div>
-        <div>
-          <img src={imageData} alt="" srcSet="" />
+        {imageData ? (
+          <>
+            <h2>Extract Text From Image</h2>
+            <Button
+              icon
+              color="linkedin"
+              labelPosition="right"
+              onClick={convertImageToText}
+            >
+              Start
+              <Icon name="right arrow" />
+            </Button>
+          </>
+        ) : null}
+        {progress ? (
+          <>
+            <p style={{ margin: "40px auto 0 auto" }}>
+              {progress.status[0].toUpperCase() + progress.status.slice(1)}
+            </p>
+            <Progress percent={progress.progress * 100} indicating />
+          </>
+        ) : null}
+        <div style={{ padding: "30px 0" }}>
+          <div style={{ display: "flex" }}>
+            <img src={imageData} alt="" srcSet="" />
+            {ocr ? (
+              <div style={{ width: "45%" }}>
+                <h2>Output</h2>
+                <p>{ocr}</p>
+              </div>
+            ) : null}
+          </div>
           <br />
-          {imageData ? (
-            <>
-              <h2>Extract Text From Image</h2>
-              <Button
-                icon
-                color="linkedin"
-                labelPosition="right"
-                onClick={convertImageToText}
-              >
-                Start
-                <Icon name="right arrow" />
-              </Button>
-            </>
-          ) : null}
-          {progress ? (
-            <>
-              <p style={{ margin: "40px auto 0 auto" }}>
-                {progress.status[0].toUpperCase() + progress.status.slice(1)}
-              </p>
-              <Progress percent={progress.progress * 100} indicating />
-            </>
-          ) : null}
-          {ocr ? (
-            <>
-              <h2>Output</h2>
-              <p>{ocr}</p>
-            </>
-          ) : null}
         </div>
         <a
           rel="noreferrer"

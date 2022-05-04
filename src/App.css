@@ -15,8 +15,12 @@
 }
 
 img {
-  margin: 30px 0;
-  height: 50vh;
+  margin: 0 auto;
+  width: 45%;
+  /* width: 90vw;
+  height: auto; */
+  /* margin: 30px 0;
+  height: 50vh; */
 }
 
 h1, h2 {
