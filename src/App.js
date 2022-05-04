@@ -1,4 +1,4 @@
-import { createRef, useState } from "react"
+import { createRef, useEffect, useState } from "react"
 import { Button, Container, Icon, Progress } from "semantic-ui-react"
 import { createWorker } from "tesseract.js"
 import "./App.css"
@@ -8,31 +8,37 @@ const App = () => {
   const [imageData, setImageData] = useState(null)
   const [imageName, setImageName] = useState("")
   const [progress, setProgress] = useState(null)
+  const [worker, setWorker] = useState(null)
+  const [isReading, setIsReading] = useState(false)
 
   const fileInputRef = createRef()
 
-  const worker = createWorker({
-    logger: (m) => setProgress(m),
-    errorHandler: (e) => console.error(e)
-  })
+  useEffect(() => {
+    createMyWorker().then((w) => setWorker(w))
+  }, [])
 
-  const convertImageToText = async () => {
-    setProgress(null)
-    setOcr("")
-    if (!imageData) return
+  useEffect(() => {
+    if (
+      progress &&
+      progress.status === "initialized api" &&
+      progress.progress === 1
+    ) {
+      setProgress(null)
+    }
+  }, [progress])
+
+  const createMyWorker = async () => {
     try {
-      await worker.load()
-      await worker.loadLanguage("eng")
-      await worker.initialize("eng")
-      const {
-        data: { text }
-      } = await worker.recognize(imageData)
-      setOcr(text)
-      setProgress((prev) => ({ ...prev, status: "done" }))
+      const myWorker = createWorker({
+        logger: (m) => setProgress(m),
+        errorHandler: (e) => console.error(e)
+      })
+      await myWorker.load()
+      await myWorker.loadLanguage("eng")
+      await myWorker.initialize("eng")
+      return myWorker
     } catch (err) {
       console.error(err)
-    } finally {
-      await worker.terminate()
     }
   }
 
@@ -48,6 +54,24 @@ const App = () => {
       setImageData(imageDataUri)
     }
     reader.readAsDataURL(file)
+  }
+
+  const convertImageToText = async () => {
+    setProgress(null)
+    setOcr("")
+    if (!imageData) return
+    setIsReading(true)
+    try {
+      const {
+        data: { text }
+      } = await worker.recognize(imageData)
+      setOcr(text)
+      setProgress((prev) => ({ ...prev, status: "done" }))
+    } catch (err) {
+      console.error(err)
+    } finally {
+      setIsReading(false)
+    }
   }
 
   return (
@@ -78,6 +102,7 @@ const App = () => {
               icon
               color="linkedin"
               labelPosition="right"
+              disabled={isReading}
               onClick={convertImageToText}
             >
               Start
